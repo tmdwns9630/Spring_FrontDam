@@ -1,0 +1,6 @@
+#Fri Dec 16 18:14:22 KST 2022
+__DEFAULT__=false
+expression=mainpage call
+org.eclipse.help.ui.localSearch.master=true
+org.eclipse.sdk.Eclipse.master=true
+org.eclipse.sdk.Google.master=true

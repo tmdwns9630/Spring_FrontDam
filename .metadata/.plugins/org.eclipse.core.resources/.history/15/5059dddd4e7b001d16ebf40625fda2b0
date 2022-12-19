@@ -1,0 +1,5 @@
+package kr.or.project.main.model;
+
+public class WalInfo {
+
+}

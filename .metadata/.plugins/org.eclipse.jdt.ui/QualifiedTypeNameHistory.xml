@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.slf4j.Logger"/>
+    <fullyQualifiedTypeName name="java.util.Locale"/>
+    <fullyQualifiedTypeName name="kr.or.dream365.main.model.request.MainInfo"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="kr.or.dream365.main.dao.MainInfo"/>
+    <fullyQualifiedTypeName name="kr.or.dream365.main.model.request.RequestMainInfo"/>
+    <fullyQualifiedTypeName name="kr.or.project.main.model.DamInfo"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
+    <fullyQualifiedTypeName name="kr.or.project.main.model.WalInfo"/>
+    <fullyQualifiedTypeName name="org.springframework.web.client.RestTemplate"/>
+    <fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
+    <fullyQualifiedTypeName name="com.google.gson.JsonArray"/>
+    <fullyQualifiedTypeName name="com.google.gson.Gson"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+</qualifiedTypeNameHistroy>

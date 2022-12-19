@@ -1,0 +1,20 @@
+package kr.or.project.main.model;
+
+public class DamInfo {
+	private String damId;
+	
+	private String danName;
+	
+	private String waterLevel;
+	
+	private String light;
+	
+	private String workNmpr;
+	
+	private String lastMesur;
+	
+	private String updtDt;
+
+	
+
+}
