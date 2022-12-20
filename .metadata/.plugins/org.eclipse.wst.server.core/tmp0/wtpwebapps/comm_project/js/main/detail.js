@@ -1,57 +1,85 @@
-console.log("디테일페이지 로딩됨");
+
+console.log("디테일aa페이지 로딩됨");
+
+//url 파라미터에서 damId값 읽어서 배열 인덱스값을 찾아냄.
+const urlParams = new URL(location.href).searchParams;
+const urlid = urlParams.get('damid');
+const jsonNum = damObj.findIndex(ele => ele.damId == urlid);
+console.log("현재 페이지 : "+jsonNum)
 
 //기존의 댐 데이터 카드 데이터를 덮어쓰는 함수.
 const damCard = (damNum) => {
-  const name = document.querySelector("#DAM_NAME");
-  const worknum = document.querySelector("#WORK_NMPR");
-  const waterSensor = document.querySelector("#WATER_LEVEL");
-  const lightSensor = document.querySelector("#LIGHT");
+  var name = document.querySelector("#DAM_NAME");
+  var worknum = document.querySelector("#WORK_NMPR");
+  var waterSensor = document.querySelector("#WATER_LEVEL");
+  var lightSensor = document.querySelector("#LIGHT");
 
+	//자꾸 있다가 없다가 하는 오류, damName is not defined라는데 있다가 없다가 그런다.
+	//일단 괄호로 감싼다.
   name.textContent = damObj[damNum].damName;
   worknum.textContent = damObj[damNum].workNmpr;
   waterSensor.textContent = damObj[damNum].waterLevel;
   lightSensor.textContent = damObj[damNum].light;
+  console.log("damCard Activated");
 };
 
 
 //home.js와 동일
 //사이드바의 댐 리스트 출력
+
+const dataGet=()=>{
+	   $.ajax({
+         url: "http://61.103.243.188:8080/main/damGet",
+         type: 'GET',
+         contentType: 'application/json',
+         dataType: 'json',
+  	    })
+    	  .done(function(result) {
+      
+        	damObj = result.dam;
+         	//console.log(damObj);
+         	damInfo = damObj.map((ele)=>{
+            return '<li class="has-subnav"><a href="#" class="dam" id="'+ele.damId+'"><i class="fa fa-laptop fa-2x"></i><span class="nav-text">'+ ele.damId +'</span></a></li>';
+         })
+      })
+}
+
+
+
+
+//사이드바의 댐 리스트 출력 함수
 const damListPrint = () => {
-  const damList = document.querySelector("#DamList");
-  var damInfo = damObj.map((ele) => {
-    return (
-      '<li class="has-subnav"><a href="#" class="dam"><i class="fa fa-laptop fa-2x"></i><span class="nav-text" id="' +
-      ele.damId +
-      '">' +
-      ele.damId +
-      "</span></a></li>"
-    );
-  });
+  //const damList = document.querySelector("#DamList");
 
   for (var i = 0; i < damInfo.length; i++) {
    // console.log(i);
     $("#DamList").append(damInfo[i]);
-    $(".dam").attr("href", "/DetailView?damid=" + damObj[i].damId);
+    $("#"+damObj[i].damId).attr("href", "/DetailView?damid=" + damObj[i].damId);
   }
   
 };
-
 const dataReset=()=>{
-	$('.sensor_area').remove();
-	
+	//$('.sensor_area').remove();
+	$('#DamList > li').remove();
 }
 
+
+/*
 document.addEventListener("DOMContentLoaded", () => {
   damListPrint();
-  //cardPrint();
-  damCard(0);
-});
-/*
-setInterval(() => {
-	dataReset();
-	$('#DamList>li').remove();
-  	damListPrint();
-  	cardPrint();
-  	console.log("setInterval Activated");
+  damCard(jsonNum);
+
+	setInterval(() => {
+		dataReset();
+		dataGet();
+  		damListPrint();
+  	    damCard(jsonNum);
+  	    console.log(waterObj)
+  
+  	console.log("set! 4000 Interval Activated");
 }, 1000);
+});
 */
+
+
+

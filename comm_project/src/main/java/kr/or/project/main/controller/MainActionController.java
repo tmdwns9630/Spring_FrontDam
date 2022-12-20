@@ -152,7 +152,9 @@ public class MainActionController {
 	      
 	        JsonObject dam=  restTemplate.getForObject("http://61.103.243.188:8080/main/damGet", JsonObject.class);
 	        JsonArray damArray= (JsonArray) dam.get("dam");
-	      
+	        System.out.print("dam==");
+	        System.out.println(damArray);
+	        
 	      JsonObject light=  restTemplate.getForObject("http://61.103.243.188:8080/main/DetailLight?damid="+damid, JsonObject.class);
 	      JsonArray lightArray= (JsonArray) light.get("light");
 	      System.out.print("light==");
@@ -169,6 +171,7 @@ public class MainActionController {
 	      mv.addObject("dam",damArray);
 	      mv.addObject("light",lightArray);
 	      mv.addObject("wal",walArray);
+	      mv.addObject("damid",damid);
 	      return mv;
 	   }
 }

@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="dam"/>
+		<item key="selection" value="MONTHS"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="dam"/>
-			<item value="title"/>
+			<item value="MONTHS"/>
+			<item value="1h"/>
+			<item value="범위"/>
+			<item value="console"/>
+			<item value="console.log"/>
+			<item value="here"/>
 			<item value="AreaChart"/>
-			<item value="waterblue"/>
-			<item value="getDamMap"/>
-			<item value="get"/>
-			<item value="getAll"/>
-			<item value="allow"/>
-			<item value="valve"/>
-			<item value="remote"/>
-			<item value="access"/>
-			<item value="acces"/>
-			<item value="useIPVHosts"/>
-			<item value="useIPVHosts=&quot;true&quot;"/>
-			<item value="directory"/>
+			<item value="인터벌"/>
+			<item value="damList"/>
+			<item value="var"/>
+			<item value="damInfo"/>
+			<item value="damObj"/>
+			<item value="damObjJSP"/>
+			<item value="DAM_NAME"/>
+			<item value="DamList"/>
 		</list>
 		<list key="replacehistory">
 			<item value="db."/>
@@ -34,8 +34,8 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="778"/>
-		<item key="DIALOG_Y_ORIGIN" value="192"/>
+		<item key="DIALOG_X_ORIGIN" value="616"/>
+		<item key="DIALOG_Y_ORIGIN" value="207"/>
 		<item key="DIALOG_WIDTH" value="322"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>

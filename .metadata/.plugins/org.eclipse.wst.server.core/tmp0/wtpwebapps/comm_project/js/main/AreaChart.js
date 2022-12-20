@@ -1,9 +1,18 @@
+//1 랜덤 데이터를 1초마다 추가하고 첫번째 레이블 삭제, 마지막 레이블을 추가함.
+/*
+2 jsp에 넣기 전, 로그 데이터를 내부 변수로 넣어서 출력
+ㄴ이 시점에서 데이터 추가 삭제는 고려 안함
+*/
 /*
  * utils.js
  * charts.js 만들기 위한 utils.js 부분
  * 공식 사이트에서 제공하는 utils.js
  */
-"use strict";
+console.log("에리어차트 파일 내부");
+//console.log(waterObj);
+
+
+("use strict");
 
 //색깔
 window.chartColors = {
@@ -179,21 +188,19 @@ window.chartColors = {
 // ------------------------------------------------------------
 
 // 차트에 표현할 x 축의 값
-var MONTHS = [
-  "0h",
-  "1h",
-  "2h",
-  "3h",
-  "4h",
-  "5h",
-  "6h",
-  "7h",
-  "8h",
-  "9h",
-  "10h",
-  "11h",
-  "12h",
-];
+//x축 레이블명을 시간으로 가져옴.
+//참고사항 : 배열 값 가져오는 함수를 추가시킴 함수명 : setArray=()=> 
+var  MONTHS= waterObj.map((ele)=>{
+	const tempArr = ele.mesurDt.split(" ");
+
+	return tempArr[1];
+	
+})
+
+
+
+//console.log(MONTHS);
+
 
 // 차트에 표현할 컬러
 var chartColors = {
@@ -211,10 +218,14 @@ var chartColors = {
 var config = {
   type: "line",
   data: {
-    labels: ["0h", "1h", "2h", "3h", "4h", "5h", "6h", "7h"],
+    labels: MONTHS,
     datasets: [],
   },
   options: {
+	//애니메이션 효과 on/off, 현재는 off
+	 animation: {
+        duration: false,
+    },
     // 컨테이너가 수행 할 때 차트 캔버스의 크기를 조정(dafalut : true)
     responsive: true,
     // 크기 조정 이벤트 후 새 크기로 애니메이션하는 데 걸리는 시간(밀리 초) (defalut : 0)
@@ -283,41 +294,59 @@ var config = {
           ticks: {
             // beginAtZero: true; //y축 0부터 시작
             min: 0, //범위 설정
-            max: 30,
+            max: 1000,
             fontSize: 14,
           },
           gridLines: {
-            lineWidth: 0,
+            lineWidth: 2,
           },
         },
       ],
     },
   },
 };
-
-// 10 ~ 20 사이 랜덤값 생성
+//Here - 여기가 랜덤값 만들어주는 곳이고
+// 400 ~ 500 사이 랜덤값 생성
 var randomScalingFactor = function () {
-  return Math.round(Samples.utils.rand(10, 20));
+  return Math.round(Samples.utils.rand(400, 500));
 };
+
+
+//Here - 수위 레벨을 분류해서 배열로 저장.
+var waterArr = []
+
+
+//todo 배열 함수 추가
+setArray=()=>{
+
+ MONTHS= waterObj.map((ele)=>{
+	const tempArr = ele.mesurDt.split(" ");
+	return tempArr[1];
+	
+})
+
+waterArr=waterObj.map((ele)=>{
+
+	return ele.waterLevel;
+})
+}
+setArray()
+
+
+
 // 새로운 데이터 만들기
+//Here - data에 배열을 넣음.
 var datasetSample = {
   label: "label",
   backgroundColor: window.chartColors.red,
   borderColor: window.chartColors.red,
-  data: [
-    randomScalingFactor(),
-    randomScalingFactor(),
-    randomScalingFactor(),
-    randomScalingFactor(),
-    randomScalingFactor(),
-    randomScalingFactor(),
-    randomScalingFactor(),
-    randomScalingFactor(),
-  ],
+  data : waterArr,
 };
 
-// 윈도우가 로드가 될때
-window.onload = function () {
+
+
+const chartMaker = () => {
+	
   // line1 ========================================================
   // 생성할 canvas 요소
   var line1 = document.getElementById("line1").getContext("2d");
@@ -343,33 +372,29 @@ window.onload = function () {
   //  ======================================================== line1
 };
 
+
+//앞뒤 데이터 넣고 빼는 함수를 임시로 여기로 빼둠
 // x 레이블 가장 끝에 데이터 및 라벨 추가 함수
 //설명 : range를 현재 데이터셋 샘플 길이로 잡고
-var i = 0;
-var range = datasetSample.data.length;
-const addData_lastLabel = () => {
-  var month;
-  month = MONTHS[range + i];
 
+
+const addData_lastLabel = () => {
+	
+	
+	
+  var month = MONTHS.slice(-1);
+  console.log("끝자리 x레이블 : "+month);
+  console.log("끝자리 수위 :"+waterArr.slice(-1));
   Chart.instances[0].config.data.labels.push(month);
   Chart.instances[0].config.data.datasets.forEach(function (dataset) {
-    dataset.data.push(randomScalingFactor());
+    dataset.data.push(waterArr.slice(-1));
+    //Here-여기서 랜덤 데이터가 계속 추가된다.
   });
+  
   Chart.instances[0].update();
   //console.log(Chart.instances[elem]);
 
-  if (range + i >= MONTHS.length - 1) {
-    console.log("##############################if문 작동");
-    range = 0;
-    i = 0;
-  } else i++;
-/*
-  console.log(`ㅁㅁㅁㅁㅁㅁㅁ먼스 : ${month}`);
-  console.log("MONTHS.length, range, i");
-  console.log(MONTHS.length);
-  console.log(range);
-  console.log(i);
-*/
+  //console.log(Chart.instances[0].config.data.datasets[0].data);
 };
 
 // x 레이블 첫번째 데이터 및 라벨 삭제 함수
@@ -384,16 +409,22 @@ const deleteData_firstLabel = () => {
   // 데이터 업데이트
   Chart.instances[0].update();
 };
-/*
-// 버튼으로 데이터 변환
-document.getElementById("addData").addEventListener("click", function () {
-  addData_lastLabel();
-  deleteData_firstLabel();
-});
-*/
+
+
+
+// 윈도우가 로드가 될때
+window.onload = function () {
+	chartMaker();
+};
+// document.addEventListener("DOMContentLoaded", () => {
+//   addData_lastLabel();
+//   deleteData_firstLabel();
+// });
+
 //n초마다 데이터 변환.
+/*
 setInterval(() => {
-  addData_lastLabel();
-  deleteData_firstLabel();
-  console.log("인터벌 ON!")
-}, 2000);
+ 	addData_lastLabel();
+	deleteData_firstLabel();
+}, 1000);
+*/

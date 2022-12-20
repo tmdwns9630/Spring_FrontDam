@@ -1,0 +1,30 @@
+
+
+const getDetaildatas=()=>{
+	$.ajax({
+         url: "http://61.103.243.188:8080/main/DetailLight?damid="+damid,
+         type: 'POST',
+         contentType: 'application/json',
+         dataType: 'json',
+      })
+      .done(function(result) {
+      
+       console.log(result)
+      })
+	$.ajax({
+         url: "http://61.103.243.188:8080/main/DetailWal?damid="+damid,
+         type: 'POST',
+         contentType: 'application/json',
+         dataType: 'json',
+      })
+      .done(function(result) {
+      
+      console.log(result)
+      })
+
+	
+	
+	
+	
+}
+

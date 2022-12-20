@@ -20,37 +20,63 @@
       integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg=="
       crossorigin="anonymous"
     ></script>
-    <script type="text/javascript" src="js/main/AreaChart.js"></script>
+
     
-	
+	<script type="text/javascript" src="js/main/getData.js"></script>
 <script type="text/javascript">
-
 //전체 댐 데이터, 사이드바에서 사용
-var strDam='${dam}'
-var damObj = JSON.parse(strDam);
-
+var strDam='${dam}';
+var damObj = JSON.parse('${dam}');
+console.log("적용");
+var damInfo = damObj.map((ele)=>{
+	 return '<li class="has-subnav"><a href="#" class="dam" id="'+ele.damId+'"><i class="fa fa-laptop fa-2x"></i><span class="nav-text" >'+ ele.damId +'</span></a></li>';
+     })
 
 //이전 물, 빛 센서값 10개.
-var strLight='${light}'
-var strWater='${wal}'
-var lightObj = JSON.parse(strLight);
-var waterObj = JSON.parse(strWater);'
-console.log("라이트");
-console.log(lightObj);
-console.log("워터");
-console.log(waterObj);
-
-
+var strLight='${light}';
+var damid='${damid}';
+var lightObj=JSON.parse('${light}');
+var strWater='${wal}';
+//var lightObj = JSON.parse(strLight);
+var waterObj = JSON.parse(strWater);
+//console.log(strWater);
+//var name = document.querySelector("#DAM_NAME");
+//name.textContent = damObj[damNum].damName;
+console.log(damObj[1].damName);
 
 </script>
 <script type="text/javascript" src="js/main/detail.js"></script>
+<script type="text/javascript" src="js/main/AreaChart.js"></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+	  
+	damListPrint();
+	  damCard(jsonNum);
+
+		setInterval(() => {
+			getDetaildatas();
+			setArray()
+			dataReset();
+			dataGet();
+	  		damListPrint();
+	  	    damCard(jsonNum);
+	  	    //console.log(waterObj)
+	  	    addData_lastLabel();
+			deleteData_firstLabel();
+	  
+	  	console.log("set! 4000 Interval Activated");
+	}, 1000);
+	});
+</script>
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■JavaScript -->
 <%@ page import="java.util.*"%>
 	
 	 <title>Dam Project</title>
     <header>
       <nav class="navbar">
-        <h3>Dam Dashboard-chart (JSP)</h3>
+        <h3>Dam Dashboard - Detail (JSP)</h3>
       </nav>
     </header>
 </head>
@@ -66,36 +92,14 @@ console.log(waterObj);
         style="width: 60%; max-width: 100px"
       />
       <ul id="DamList">
+        <!-- 
         <li>
           <a href="#">
             <i class="fa fa-laptop fa-2x"></i>
             <span class="nav-text" id="btn1"> Dam 1 </span>
           </a>
         </li>
-        <li class="has-subnav">
-          <a href="#">
-            <i class="fa fa-laptop fa-2x"></i>
-            <span class="nav-text"> Dam 2 </span>
-          </a>
-        </li>
-        <li class="has-subnav">
-          <a href="#">
-            <i class="fa fa-laptop fa-2x"></i>
-            <span class="nav-text"> Dam 3 </span>
-          </a>
-        </li>
-        <li class="has-subnav">
-          <a href="#">
-            <i class="fa fa-laptop fa-2x"></i>
-            <span class="nav-text"> Dam 4 </span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-laptop fa-2x"></i>
-            <span class="nav-text"> Dam 5 </span>
-          </a>
-        </li>
+         -->
       </ul>
     </nav>
     <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■좌측 사이드바 ■■■ -->

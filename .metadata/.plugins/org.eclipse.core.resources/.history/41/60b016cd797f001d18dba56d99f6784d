@@ -1,0 +1,176 @@
+package kr.or.project.main.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import kr.or.project.main.model.DamInfo;
+import kr.or.project.main.model.NoticeInfo;
+import kr.or.project.main.model.WalInfo;
+import kr.or.project.main.service.MainService;
+
+@Controller
+public class MainActionController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(MainActionController.class);
+	
+	@Autowired
+	MainService mainService;
+	
+	@RequestMapping(value = {"/" , "/mainContentView.do"})
+	public ModelAndView mainContentView(HttpSession session, Locale locale, Model model) throws Exception{
+
+		System.out.println("mainpage call!");
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName( "/main/mainList");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/main/getMainInfos.do")
+	@ResponseBody
+	public Map getMainInfos(HttpServletRequest request, Model model, @RequestBody NoticeInfo noticeParam) throws Exception{
+		
+		Map<String, Object> rMap = new HashMap<String, Object>();
+		
+		List<NoticeInfo> mainResult = mainService.selectMainInfo(noticeParam);
+		
+		rMap.put("mainResult", mainResult);
+		
+		return rMap;
+	}
+	
+
+	//여기 내가만든 get
+	//dam 테이블 get
+	@RequestMapping(method = RequestMethod.GET, path = "/main/damGet")
+	@ResponseBody
+	public Map damGet(HttpServletRequest request) throws Exception {
+		System.out.println("함수실행");
+		Map<String, Object> getDamMap = new HashMap<String, Object>();
+
+		List<DamInfo> damResult = mainService.selectDam();
+		
+		System.out.println(damResult.get(0).getDamId());
+		
+		getDamMap.put("dam", damResult);
+		
+	
+		System.out.println(getDamMap);
+		return getDamMap;
+	}
+	
+	//수위테이블 블러오기
+	@RequestMapping(method = RequestMethod.GET, path = "/main/walGet")
+	@ResponseBody
+	public Map walGet(HttpServletRequest request) throws Exception {
+		Map<String, Object> getWalMap = new HashMap<String, Object>();
+		System.out.println("함수실행");
+		List<WalInfo> walResult = mainService.selectWal();
+		
+		System.out.println(walResult);
+		
+		getWalMap.put("wal", walResult);
+		
+		System.out.println(getWalMap);
+		
+		return getWalMap;
+	}
+	
+	
+	
+	   
+	   @RequestMapping("/user/list")
+	   public List<DamInfo> list () {
+	     RestTemplate restTemplate = new RestTemplate();
+	     
+	     JsonObject users=  restTemplate.getForObject("http://61.103.243.188:8080/main/damGet", JsonObject.class);
+	     List<DamInfo> list= new ArrayList<DamInfo>();
+	     JsonArray array= (JsonArray) users.get("dam");
+	     for(Object obj:array){
+	        list.add(new Gson().fromJson((JsonObject)obj,DamInfo.class));
+	        
+	     }
+	     for(DamInfo a: list) {
+	        
+	        System.out.println("id="+a.getDamId()+"name="+a.getDamName()+"light="+a.getLight()+"waterlevel="+a.getWaterLevel());
+	     }
+
+	     System.out.println(users.toString());
+	     
+	     
+	     return new ArrayList<DamInfo>();
+	   }
+	   
+	   
+	   @RequestMapping("/DamView")
+	   public ModelAndView testview(HttpSession session, Locale locale, Model model) throws Exception{
+
+	      ModelAndView mv = new ModelAndView();
+
+	      RestTemplate restTemplate = new RestTemplate();
+	   
+	        JsonObject dam=  restTemplate.getForObject("http://61.103.243.188:8080/main/damGet", JsonObject.class);
+	        JsonArray damArray= (JsonArray) dam.get("dam");
+
+	      System.out.println("mainpage call!");
+	      mv.setViewName( "/main/DamView");
+	      mv.addObject("data",damArray);
+	      return mv;
+	   }
+	   
+	   
+	   @RequestMapping("/DetailView")
+	   public ModelAndView DetailView(HttpSession session, Locale locale, Model model,HttpServletRequest request) throws Exception{
+
+	      ModelAndView mv = new ModelAndView();
+	      String damid=request.getParameter("damid");
+	      RestTemplate restTemplate = new RestTemplate();
+	      
+	        JsonObject dam=  restTemplate.getForObject("http://61.103.243.188:8080/main/damGet", JsonObject.class);
+	        JsonArray damArray= (JsonArray) dam.get("dam");
+	        System.out.print("dam==");
+	        System.out.println(damArray);
+	        
+	      JsonObject light=  restTemplate.getForObject("http://61.103.243.188:8080/main/DetailLight?damid="+damid, JsonObject.class);
+	      JsonArray lightArray= (JsonArray) light.get("light");
+	      System.out.print("light==");
+	      System.out.println(lightArray);
+	      
+	      
+	      JsonObject wal=  restTemplate.getForObject("http://61.103.243.188:8080/main/DetailWal?damid="+damid, JsonObject.class);
+	      System.out.println(wal);
+	      
+	      JsonArray walArray= (JsonArray) wal.get("wal");
+	      
+	      System.out.println("detailpage call!");
+	      mv.setViewName( "/main/DetailView");
+	      mv.addObject("dam",damArray);
+	      mv.addObject("light",lightArray);
+	      mv.addObject("wal",walArray);
+	      return mv;
+	   }
+}

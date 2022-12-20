@@ -1,0 +1,48 @@
+const getDam=()=>{
+
+$.ajax({
+         url: "http://61.103.243.188:8080/main/damGet",
+         type: 'GET',
+         contentType: 'application/json',
+         dataType: 'json',
+      })
+      .done(function(result) {
+      
+         damObj=result.dam;
+         console.log(damObj);
+         damInfo = damObj.map((ele)=>{
+            return '<li class="has-subnav"><a href="#" class="dam"><i class="fa fa-laptop fa-2x"></i><span class="nav-text" id="'+ele.damId+'">'+ ele.damId +'</span></a></li>';
+         })
+      })
+
+      
+}
+
+const getDetaildatas=()=>{
+	$.ajax({
+         url: "http://61.103.243.188:8080/main/DetailLight?damid="+damid,
+         type: 'GET',
+         contentType: 'application/json',
+         dataType: 'json',
+      })
+      .done(function(result) {
+      
+       console.log(result)
+      })
+	$.ajax({
+         url: "http://61.103.243.188:8080/main/DetailWal?damid="+damid,
+         type: 'GET',
+         contentType: 'application/json',
+         dataType: 'json',
+      })
+      .done(function(result) {
+      
+      console.log(result)
+      })
+
+	
+	
+	
+	
+}
+

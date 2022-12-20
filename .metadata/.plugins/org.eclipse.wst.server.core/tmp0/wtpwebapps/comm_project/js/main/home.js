@@ -1,6 +1,6 @@
-console.log("카드리스트 로딩됨");
+//console.log("카드리스트 로딩됨");
 
-
+//데이터 카드 html 코드 만드는 함수.
 const cardinfo = (ele) => {
   return `<div class="sensor_area">
         <div class="sensor_block externalCard_black">
@@ -28,8 +28,7 @@ const cardinfo = (ele) => {
             ${ele.light}
           </div>
         </div>
-    
-        </div>
+       </div>
       `;
 };
 
@@ -44,42 +43,60 @@ const cardPrint = () => {
   });
 };
 
-//사이드바의 댐 리스트 출력
+
+const dataGet=()=>{
+	   $.ajax({
+         url: "http://61.103.243.188:8080/main/damGet",
+         type: 'GET',
+         contentType: 'application/json',
+         dataType: 'json',
+  	    })
+    	  .done(function(result) {
+      
+        	damObj = result.dam;
+         	//console.log(damObj);
+         	damInfo = damObj.map((ele)=>{
+            return '<li class="has-subnav"><a href="#" class="dam" id="'+ele.damId+'"><i class="fa fa-laptop fa-2x"></i><span class="nav-text">'+ ele.damId +'</span></a></li>';
+         })
+      })
+}
+
+//사이드바의 댐 리스트 출력 함수
 const damListPrint = () => {
-  const damList = document.querySelector("#DamList");
-  var damInfo = damObj.map((ele) => {
-    return (
-      '<li class="has-subnav"><a href="#" class="dam"><i class="fa fa-laptop fa-2x"></i><span class="nav-text" id="' +
-      ele.damId +
-      '">' +
-      ele.damId +
-      "</span></a></li>"
-    );
-  });
+  //const damList = document.querySelector("#DamList");
 
   for (var i = 0; i < damInfo.length; i++) {
    // console.log(i);
     $("#DamList").append(damInfo[i]);
-    $(".dam").attr("href", "/DetailView?damid=" + damObj[i].damId);
+    $("#"+damObj[i].damId).attr("href", "/DetailView?damid=" + damObj[i].damId);
+    
   }
   
 };
 
 const dataReset=()=>{
 	$('.sensor_area').remove();
-	
+	$('#DamList > li').remove();
 }
+console.log("호출1")
 
 document.addEventListener("DOMContentLoaded", () => {
+	console.log("호출3");
+
+	//dataGet();
   damListPrint();
+ 
   cardPrint();
-});
-/*
+
 setInterval(() => {
 	dataReset();
-	$('#DamList>li').remove();
+	dataGet();
   	damListPrint();
+  	      
   	cardPrint();
-  	console.log("setInterval Activated");
+  	
+  	console.log("set! 2000 Interval Activated");
 }, 1000);
-*/
+});
+
+

@@ -19,25 +19,10 @@
 <script type="text/javascript">
 var str='${data}'
 var damObj = JSON.parse(str);
-
-
-console.log(damObj);
-
-//home.js에 함수화함.
-/* 
 var damInfo = damObj.map((ele)=>{
-	return '<li class="has-subnav"><a href="#" class="dam"><i class="fa fa-laptop fa-2x"></i><span class="nav-text" id="'+ele.damId+'">'+ ele.damId +'</span></a></li>';
-})
-//console.log(damInfo);
-
-document.addEventListener('DOMContentLoaded',()=>{   
-for(var i=0;i<damInfo.length;i++){
-   console.log(i);
-   $('#DamList').append(damInfo[i]);
-   $('.dam').attr("href","/DetailView?damid="+damObj[i].damId);
-}
-})
-*/
+        return '<li class="has-subnav"><a href="#" class="dam" id="'+ele.damId+'"><i class="fa fa-laptop fa-2x"></i><span class="nav-text" >'+ ele.damId +'</span></a></li>';
+     })
+//console.log(damObjJSP);
 </script>
 <script type="text/javascript" src="js/main/home.js"></script>
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■JavaScript -->
@@ -46,7 +31,7 @@ for(var i=0;i<damInfo.length;i++){
 	 <title>Dam Project</title>
     <header>
       <nav class="navbar">
-        <h3>Dam Dashboard (JSP)</h3>
+        <h3>Dam Dashboard - HOME (JSP)</h3>
       </nav>
     </header>
 </head>
@@ -63,12 +48,7 @@ for(var i=0;i<damInfo.length;i++){
       />
       <ul id="DamList">
         <!-- 
-        <li>
-          <a href="#">
-            <i class="fa fa-laptop fa-2x"></i>
-            <span class="nav-text" > Dam 1 </span>
-          </a>
-        </li>
+        li 태그로 사이드바 들어가는 Dam List
          -->
       </ul>
     </nav>
@@ -78,27 +58,7 @@ for(var i=0;i<damInfo.length;i++){
       <!-- 중앙 구역 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
      
       <div class="middle_page border_blue_dot">
-      <!--  js 코드로 반복해서 들어감
- 			<div class="sensor_area border_yellow_dot">
-	          <div class="sensor_block externalCard_black" >
-	            <div class="sensor_name">댐 이름</div>
-	            <div class="sensor_data" id="DAM_NAME"></div>
-	          </div>
-	          <div class="sensor_block externalCard_black">
-	            <div class="sensor_name">현재 근무자</div>
-	            <div class="sensor_data" id="WORK_NMPR">1972 명</div>
-	          </div>
-	          <div class="sensor_block externalCard">
-	            <div class="sensor_name">수위 센서</div>
-	            <div class="sensor_data" id="WATER_LEVEL">12345</div>
-	          </div>
-	
-	          <div class="sensor_block externalCard">
-	            <div class="sensor_name">조도 센서</div>
-	            <div class="sensor_data" id="LIGHT">67890</div>
-	          </div>
-        	</div>
-	 -->	
+      <!--  카드리스트 들어가는 구역	 -->	
       </div>
       <!--  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 중앙 구역-->
       
