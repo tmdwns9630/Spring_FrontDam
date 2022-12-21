@@ -27,7 +27,7 @@
 //전체 댐 데이터, 사이드바에서 사용
 var strDam='${dam}';
 var damObj = JSON.parse('${dam}');
-console.log("적용");
+//console.log("적용");
 var damInfo = damObj.map((ele)=>{
 	 return '<li class="has-subnav"><a href="#" class="dam" id="'+ele.damId+'"><i class="fa fa-laptop fa-2x"></i><span class="nav-text" >'+ ele.damId +'</span></a></li>';
      })
@@ -42,7 +42,7 @@ var waterObj = JSON.parse(strWater);
 //console.log(strWater);
 //var name = document.querySelector("#DAM_NAME");
 //name.textContent = damObj[damNum].damName;
-console.log(damObj[1].damName);
+//console.log(damObj[1].damName);
 
 </script>
 <script type="text/javascript" src="js/main/detail.js"></script>
@@ -51,22 +51,28 @@ console.log(damObj[1].damName);
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-	  
+	detailTablePrint();
 	damListPrint();
-	  damCard(jsonNum);
+	logTablePrint();
+	console.log("리액트님 next.js님 지고나서야 꽃인줄 알았습니다...")
+	
 
 		setInterval(() => {
+			
 			getDetaildatas();
 			setArray()
 			dataReset();
 			dataGet();
 	  		damListPrint();
-	  	    damCard(jsonNum);
-	  	    //console.log(waterObj)
+	  		detailTablePrint();
+	  	
+	  		logTablePrint();
+
 	  	    addData_lastLabel();
 			deleteData_firstLabel();
+			
 	  
-	  	console.log("set! 4000 Interval Activated");
+	  	//console.log("set! 4000 Interval Activated");
 	}, 1000);
 	});
 </script>
@@ -82,9 +88,10 @@ document.addEventListener("DOMContentLoaded", () => {
 </head>
 
 
- <body>
+ <body class="overflow_hidden">
     <!--  ■■■좌측 사이드바 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
     <nav class="main-menu">
+      <div class="area_catcher"></div>
       <img
         class="icon_sun"
         src="https://blog.kakaocdn.net/dn/61zMy/btrh7wm0fCv/IgGApTNnNkY2Y9UVKKWjbK/img.png"
@@ -104,35 +111,44 @@ document.addEventListener("DOMContentLoaded", () => {
     </nav>
     <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■좌측 사이드바 ■■■ -->
     <!--  원래 좌 중 우로 구역을 나눴으나 좌, 우를 지움 -->
-    <div class="TotalPage border_red_power_dot">
+    <div class="TotalPage detailwidth border_red_power_dot">
       <!-- 중앙 구역 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
       <div class="middle_page border_blue_dot">
-        <div class="sensor_area border_yellow_dot">
-          <div class="sensor_block externalCard_black">
-            <div class="sensor_name">댐 이름</div>
-            <div class="sensor_data" id="DAM_NAME">asd</div>
-          </div>
-          <div class="sensor_block externalCard_black">
-            <div class="sensor_name">현재 근무자</div>
-            <div class="sensor_data" id="WORK_NMPR">1972 명</div>
-          </div>
-          <div class="sensor_block externalCard">
-            <div class="sensor_name">수위 센서</div>
-            <div class="sensor_data" id="WATER_LEVEL">12345</div>
-          </div>
-
-          <div class="sensor_block externalCard">
-            <div class="sensor_name">조도 센서</div>
-            <div class="sensor_data" id="LIGHT">67890</div>
-          </div>
-        </div>
+         <table class="sensor_table border_yellow_dot">
+          <tr class="sensor_th">
+            <th class="detail_th">댐 이름</th>
+            <th class="detail_th">수위 센서</th>
+            <th class="detail_th">조도 센서</th>
+            <th class="detail_th">현재 근무자</th>
+          </tr>
+          <tr class="sensor_row">
+            <td class="sensor_td" id="DAM_NAME ">댐 n</td>
+            <td class="sensor_td" id="WATER_LEVEL">12345</td>
+            <td class="sensor_td" id="LIGHT">67890</td>
+            <td class="sensor_td" id="WORK_NMPR">1972 명</td>
+          </tr>
+        </table>
 		
         <!--  차트가 들어갈 영역 ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ -->
         <div class="chart_area border_blue_dot">
-          <!-- <button id="addData">First Out * Last In</button> -->
-          <div class="chart-container border_red_dot">
-            <canvas id="line1" class="border_pink_dot"></canvas>
-          </div>
+          <!-- <button id="addData">First Out * Last In</button> -->  
+           <div class="chartDetail-container border_red_dot">
+               
+            <canvas id="line1" class="border_pink_dot"></canvas>  
+            <div class="water_table_container">
+            <table class="water_table">
+              <tr class="water_th">
+                <th class="detail_th">시간</th>
+                <th class="detail_th">수위(%)</th>
+              </tr>
+              <tr class="water_row">
+                <td class="sensor_td" id="water_time">12:34:56</td>
+                <td class="sensor_td" id="water_level_tb">789</td>
+              </tr>
+              
+            </table>
+            </div>       
+       		</div>
         </div>
         <!-- ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ차트가 들어갈 영역 -->
         

@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="MONTHS"/>
+		<item key="selection" value="wrap"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="wrap"/>
+			<item value="chartDetail-container"/>
+			<item value="water_table"/>
+			<item value="mesurDt"/>
+			<item value="water_row"/>
 			<item value="MONTHS"/>
-			<item value="1h"/>
-			<item value="범위"/>
-			<item value="console"/>
 			<item value="console.log"/>
-			<item value="here"/>
-			<item value="AreaChart"/>
-			<item value="인터벌"/>
-			<item value="damList"/>
-			<item value="var"/>
-			<item value="damInfo"/>
-			<item value="damObj"/>
-			<item value="damObjJSP"/>
-			<item value="DAM_NAME"/>
-			<item value="DamList"/>
+			<item value="text"/>
+			<item value="sensor_table"/>
+			<item value="water"/>
+			<item value="waterobj"/>
+			<item value="half_half"/>
+			<item value="chartDetail"/>
+			<item value="sensor_ar"/>
+			<item value="sensor_bo"/>
 		</list>
 		<list key="replacehistory">
+			<item value="damObj"/>
 			<item value="db."/>
 			<item value="mariadb"/>
 			<item value="dream365."/>
@@ -34,10 +35,10 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="616"/>
-		<item key="DIALOG_Y_ORIGIN" value="207"/>
+		<item key="DIALOG_X_ORIGIN" value="666"/>
+		<item key="DIALOG_Y_ORIGIN" value="208"/>
 		<item key="DIALOG_WIDTH" value="322"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
-		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕"/>
 	</section>
 </section>

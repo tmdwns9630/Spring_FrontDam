@@ -14,7 +14,11 @@
 	<!-- JavaScript ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
 	<script type="text/javascript" src="/js/lib/jquery-1.11.1.min.js"></script> 
 	<script type="text/javascript" src="/js/main/main.js"></script>
-    
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"
+      integrity="sha512-QEiC894KVkN9Tsoi6+mKf8HaCLJvyA6QIRzY5KrfINXYuP9NxdIkRQhGq3BZi0J4I7V5SidGM3XUQ5wFiMDuWg=="
+      crossorigin="anonymous"
+    ></script>
 	
 <script type="text/javascript">
 var str='${data}'
@@ -24,6 +28,7 @@ var damInfo = damObj.map((ele)=>{
      })
 //console.log(damObjJSP);
 </script>
+ <script type="text/javascript" src="js/main/BarChart.js"></script>
 <script type="text/javascript" src="js/main/home.js"></script>
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■JavaScript -->
 <%@ page import="java.util.*"%>
@@ -40,6 +45,7 @@ var damInfo = damObj.map((ele)=>{
  <body>
     <!--  ■■■좌측 사이드바 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
     <nav class="main-menu">
+    <div class="area_catcher"></div>
       <img
         class="icon_sun"
         src="https://blog.kakaocdn.net/dn/61zMy/btrh7wm0fCv/IgGApTNnNkY2Y9UVKKWjbK/img.png"
@@ -54,11 +60,31 @@ var damInfo = damObj.map((ele)=>{
     </nav>
     <!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■좌측 사이드바 ■■■ -->
     <!--  원래 좌 중 우로 구역을 나눴으나 좌, 우를 지움 -->
-    <div class="TotalPage border_red_power_dot">
+    <div class="TotalPage  border_red_power_dot">
       <!-- 중앙 구역 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
-     
-      <div class="middle_page border_blue_dot">
-      <!--  카드리스트 들어가는 구역	 -->	
+      <div class="middle_page  border_blue_dot">
+        <!--  차트가 들어갈 영역 ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ -->
+        <div class="chart_area border_red_dot half_half">
+          <!-- <button id="addData">First Out * Last In</button> -->
+		 <div class="chart-container border_red_dot">
+          <canvas id="line1" class=" half_area border_pink_dot"></canvas>
+        </div>
+        </div>
+        <!-- ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ차트가 들어갈 영역 -->
+        <table class="sensor_table border_yellow_dot">
+          <tr class="sensor_th">
+            <th class="sensor_th">댐 이름</th>
+            <th class="sensor_th">수위 센서</th>
+            <th class="sensor_th">조도 센서</th>
+            <th class="sensor_th">현재 근무자</th>
+          </tr>
+          <tr class="sensor_row">
+            <td class="sensor_td" id="DAM_NAME ">댐 n</td>
+            <td class="sensor_td" id="WATER_LEVEL">12345</td>
+            <td class="sensor_td" id="LIGHT">67890</td>
+            <td class="sensor_td" id="WORK_NMPR">1972 명</td>
+          </tr>
+        </table>
       </div>
       <!--  ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 중앙 구역-->
       

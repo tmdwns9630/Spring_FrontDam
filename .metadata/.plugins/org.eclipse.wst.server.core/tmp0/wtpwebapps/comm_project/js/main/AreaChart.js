@@ -294,7 +294,7 @@ var config = {
           ticks: {
             // beginAtZero: true; //y축 0부터 시작
             min: 0, //범위 설정
-            max: 1000,
+            max: 100,
             fontSize: 14,
           },
           gridLines: {
@@ -325,9 +325,10 @@ setArray=()=>{
 	
 })
 
+// 나누기 10 해서 %로 변환.
 waterArr=waterObj.map((ele)=>{
 
-	return ele.waterLevel;
+	return ele.waterLevel/10;
 })
 }
 setArray()
@@ -356,7 +357,7 @@ const chartMaker = () => {
   var line1DatasetSample = JSON.parse(JSON.stringify(datasetSample));
 
   /// 라벨
-  line1DatasetSample.label = "시간당 수위";
+  line1DatasetSample.label = "시간당 수위(%)";
   // 채우기 옵션
   line1DatasetSample.fill = "start";
   // 채웠을 때 색깔
@@ -377,24 +378,24 @@ const chartMaker = () => {
 // x 레이블 가장 끝에 데이터 및 라벨 추가 함수
 //설명 : range를 현재 데이터셋 샘플 길이로 잡고
 
-
+//추가할 x레이블 및 수위 데이터, 최신 데이터 배열 마지막행, 로그 테이블에서도 사용.
+var addmonth= MONTHS.slice(-1);
+var addWater = waterArr[waterArr.length-1];
+//최신 데이터에 추가할 배열.
 const addData_lastLabel = () => {
 	
-	
-	
-  var month = MONTHS.slice(-1);
-  console.log("끝자리 x레이블 : "+month);
-  console.log("끝자리 수위 :"+waterArr.slice(-1));
-  Chart.instances[0].config.data.labels.push(month);
-  Chart.instances[0].config.data.datasets.forEach(function (dataset) {
-    dataset.data.push(waterArr.slice(-1));
-    //Here-여기서 랜덤 데이터가 계속 추가된다.
-  });
-  
-  Chart.instances[0].update();
-  //console.log(Chart.instances[elem]);
 
-  //console.log(Chart.instances[0].config.data.datasets[0].data);
+  Chart.instances[0].config.data.labels.push(addmonth);
+  Chart.instances[0].config.data.datasets.forEach(function (dataset) {
+  
+  //Here-여기서 랜덤 데이터가 계속 추가된다.
+  //새로 받는 수위 데이터의 배열 마지막 요소를 push한다.
+  dataset.data.push(addWater);
+    
+   //console.log(waterArr.slice(-1));
+  });
+  Chart.instances[0].update();
+
 };
 
 // x 레이블 첫번째 데이터 및 라벨 삭제 함수
@@ -408,23 +409,45 @@ const deleteData_firstLabel = () => {
   });
   // 데이터 업데이트
   Chart.instances[0].update();
+  //console.log(Chart.instances[0].config.data.datasets)
 };
 
+
+
+//--테이블용 함수----------------------------------------------
+
+//데이터 카드 html 코드 만드는 함수
+//로 테이블의 row 만드는 코드로 개조한 함수
+const loginfo = (ele) => {
+	const tempTime = ele.mesurDt.split(" ");
+	//console.log(tempTime)
+
+  return `
+  <tr class="water_row">
+    <td class="sensor_td" id="water_time">${tempTime[1]}</td>
+    <td class="sensor_td" id="water_level_tb">${ele.waterLevel/10} %</td>
+  </tr>
+  `;
+};
+
+
+const logTablePrint = () => {
+  $('.water_row').remove(); //기본으로 있던 데이터를 지워주고 작성.
+  const infoList = document.querySelector(".water_table");
+  var logTotable = waterObj.map((ele)=>{
+	
+	return loginfo(ele);
+  });
+
+  logTotable.forEach((value)=>{
+  	infoList.innerHTML +=value;
+  })
+};
+//---------------------------------------테이블용 함수-----------
 
 
 // 윈도우가 로드가 될때
 window.onload = function () {
 	chartMaker();
-};
-// document.addEventListener("DOMContentLoaded", () => {
-//   addData_lastLabel();
-//   deleteData_firstLabel();
-// });
 
-//n초마다 데이터 변환.
-/*
-setInterval(() => {
- 	addData_lastLabel();
-	deleteData_firstLabel();
-}, 1000);
-*/
+};

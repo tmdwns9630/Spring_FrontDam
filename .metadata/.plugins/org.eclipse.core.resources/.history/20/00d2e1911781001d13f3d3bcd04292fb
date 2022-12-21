@@ -1,0 +1,273 @@
+/*--영역 확인용 색깔 점선----------------- */
+
+.border_pink_dot {
+  border: dotted 2px rgb(240, 15, 228);
+}
+
+.border_purple_dot {
+  border: dotted 2px rgb(86, 1, 146);
+}
+
+.border_blue_dot {
+  border: dotted 2px rgb(26, 15, 240);
+}
+
+.border_red_dot {
+  border: dotted 2px rgb(240, 15, 15);
+}
+
+.border_yellow_dot {
+  border: dotted 2px rgba(251, 255, 0, 0.863);
+}
+
+.border_red_power_dot {
+  border: dotted 5px rgb(163, 1, 1);
+}
+.border_white_solid {
+  border: solid 2px rgb(255, 255, 255);
+}
+
+/*------------------영역 확인용 색깔 점선--*/
+
+/* 토글버튼------------------- */
+
+/* ------------------토글버튼 */
+
+body {
+  background-color: #eeeeee;
+  color: black;
+  margin: 0;
+  height: 70vh;
+  /* min-width: 420px; */
+}
+header {
+  margin-top: 7%;
+}
+
+.navbar {
+  color: #fff;
+  background-color: #19222a;
+  border-color: #19222a;
+  position: fixed;
+  top: 0;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 10%;
+  overflow: hidden;
+
+  z-index: 2000;
+}
+
+.navbar > button,
+.navbar > h3 {
+  display: inline-block;
+}
+.sidebarBtn {
+  margin: 0 20px 0 10px;
+  display: none;
+  border: #fff solid 1px;
+  border-radius: 30%;
+  background-color: #19222a;
+}
+.sidebarBtn > svg {
+  pointer-events: none;
+}
+
+.TotalPage {
+  display: flex;
+  justify-content: center;
+  margin-left: 150px;
+  width: 90%;
+  
+  
+}
+
+
+
+@media screen and (max-width: 800px) {
+  .TotalPage {
+    display: flex;
+    justify-content: center;
+    margin-left: 0;
+    width: 100%;
+ /* background-color: aquamarine; */
+  }
+
+  .navbar > button {
+    display: inline-block;
+  }
+}
+
+/* -----middle------------------------- */
+.middle_page {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  height:80vh;
+  width: 100%; 
+
+}
+
+
+
+.sensor_area {
+  margin-bottom: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+}
+
+/* ----------Data Card---------- */
+
+.block_updown{
+	display:flex;
+    justify-content: center;
+	flex-wrap: wrap;
+	width: 70%;
+	
+	
+}
+.sensor_block {
+  border: solid 1px;
+  display: inline-block;
+  text-align: center;
+  margin: 10px 0px auto 30px;
+  padding: 0px 5px 3px 5px;
+  width:40%
+  /* font-size: 30%; */
+}
+
+.externalCard {
+  word-wrap: break-word;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+
+  --bs-bg-opacity: 1;
+  background-color: #0d6efd;
+  color: #fff;
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+
+  padding: 0.5rem 1rem;
+
+  border-top: 2px solid rgba(231, 197, 197, 0.125);
+}
+
+.externalCard_black {
+  word-wrap: break-word;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+
+  --bs-bg-opacity: 1;
+  background-color: #19222a;
+  color: #fff;
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+
+  padding: 0.5rem 1rem;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.sensor_name {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+ .sensor_data {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ------------Table--------------- */
+.sensor_table {
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+  border-top: 5px solid #dcdcdc;
+  border-collapse: collapse;
+  font-weight: bolder;
+}
+
+/* TableHead */
+.sensor_th {
+  border-bottom: 1px solid #dfdfdf;
+  border-left: 1px solid #dfdfdf;
+  padding: 10px;
+  background-color: #f5f5f5;
+}
+
+/* TableData */
+.sensor_td {
+  border-bottom: 1px solid #dfdfdf;
+  border-left: 1px solid #dfdfdf;
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+/*for Detail.jsp */
+.detail_th {
+  border-bottom: 1px solid #dfdfdf;
+  border-left: 1px solid #dfdfdf;
+  padding: 10px;
+  background-color: #19222a;
+  color: #fff;
+  font-weight: bolder;
+}
+
+.water_table {
+  text-align: center;
+  margin-top: 20px;
+  width: 25%;
+  height: 50vh;
+  flex-wrap: wrap;
+  border-top: 5px solid #dcdcdc;
+  border-collapse: collapse;
+  font-weight: bolder;
+  overflow-y:scroll;
+}
+
+/* ----------Chart---------- */
+.chart_area {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height:100%;
+  flex-wrap:wrap;
+  /* 
+  width 90% 이상이면 화면 100%일때 왠진 모르겠는데 차트가 안뜸;;*/
+}
+
+.chart-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height:100%;
+}
+.chartDetail-container{
+	width: 100%;
+  display: flex;
+  justify-content: center;
+  height:100%;
+	
+}
+
+canvas {
+  border: solid 1px rgb(0, 0, 0);
+  background-color: white;
+  max-width: 70%;
+  height:100%;
+  margin-top: 30px;
+}
+
+
+.half_half{
+	height:50%;
+  	
+}
+
+/* ----------------------------middle--- */

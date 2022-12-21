@@ -9,7 +9,7 @@ $.ajax({
       .done(function(result) {
       
          damObj=result.dam;
-         console.log(damObj);
+         //console.log(damObj);
          damInfo = damObj.map((ele)=>{
             return '<li class="has-subnav"><a href="#" class="dam"><i class="fa fa-laptop fa-2x"></i><span class="nav-text" id="'+ele.damId+'">'+ ele.damId +'</span></a></li>';
          })
@@ -27,7 +27,7 @@ const getDetaildatas=()=>{
       })
       .done(function(result) {
       lightObj=result.light
-       console.log(result)
+       //console.log(result)
       })
 	$.ajax({
          url: "http://61.103.243.188:8080/main/DetailWal?damid="+damid,
@@ -37,7 +37,7 @@ const getDetaildatas=()=>{
       })
       .done(function(result) {
       waterObj=result.wal
-      console.log(result)
+      //console.log(result)
       })
 
 	

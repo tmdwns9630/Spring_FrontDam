@@ -5,10 +5,13 @@ console.log("디테일aa페이지 로딩됨");
 const urlParams = new URL(location.href).searchParams;
 const urlid = urlParams.get('damid');
 const jsonNum = damObj.findIndex(ele => ele.damId == urlid);
-console.log("현재 페이지 : "+jsonNum)
+//console.log("현재 페이지 : "+jsonNum)
 
 //기존의 댐 데이터 카드 데이터를 덮어쓰는 함수.
+/*
 const damCard = (damNum) => {
+  console.log("로그 정보")
+  console.log(document.querySelector("#DAM_NAME"));
   var name = document.querySelector("#DAM_NAME");
   var worknum = document.querySelector("#WORK_NMPR");
   var waterSensor = document.querySelector("#WATER_LEVEL");
@@ -17,11 +20,44 @@ const damCard = (damNum) => {
 	//자꾸 있다가 없다가 하는 오류, damName is not defined라는데 있다가 없다가 그런다.
 	//일단 괄호로 감싼다.
   name.textContent = damObj[damNum].damName;
-  worknum.textContent = damObj[damNum].workNmpr;
-  waterSensor.textContent = damObj[damNum].waterLevel;
-  lightSensor.textContent = damObj[damNum].light;
-  console.log("damCard Activated");
+  worknum.textContent = damObj[damNum].workNmpr +" 명";
+  waterSensor.textContent = damObj[damNum].waterLevel/10 + " %";
+  lightSensor.textContent = damObj[damNum].light+" Lx";
+  //console.log("damCard Activated");
 };
+*/
+//--테이블용 함수----------------------------------------------
+
+//데이터 카드 html 코드 만드는 함수
+//로 테이블의 row 만드는 코드로 개조한 함수
+const tableinfo = (ele) => {
+  return `
+  <tr class="sensor_row">
+    <td class="sensor_td" id="DAM_NAME ">
+      ${ele.damName}
+    </td>
+    <td class="sensor_td" id="WATER_LEVEL">
+      ${ele.waterLevel/10} %
+    </td>
+    <td class="sensor_td" id="LIGHT">
+      ${ele.light} Lx
+    </td>
+    <td class="sensor_td" id="WORK_NMPR">
+      ${ele.workNmpr} 명
+    </td>
+  </tr>
+  `;
+};
+
+
+const detailTablePrint = () => {
+  $(".sensor_row").remove(); //기본으로 있던 데이터를 지워주고 작성.
+  const cardList = document.querySelector(".sensor_table");
+  var cardTotable = tableinfo(damObj[jsonNum]);
+  //console.log(cardTotable); 
+  cardList.innerHTML += cardTotable
+};
+//---------------------------------------테이블용 함수-----------
 
 
 //home.js와 동일
