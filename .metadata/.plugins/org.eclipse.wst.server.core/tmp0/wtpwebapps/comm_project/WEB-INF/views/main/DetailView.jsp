@@ -53,12 +53,13 @@ var waterObj = JSON.parse(strWater);
 document.addEventListener("DOMContentLoaded", () => {
 	detailTablePrint();
 	damListPrint();
-	logTablePrint();
-	console.log("리액트님 next.js님 지고나서야 꽃인줄 알았습니다...")
 	
-
-		setInterval(() => {
-			
+	logTablePrint();
+	
+	setInterval(() => {
+			checklastArr();
+			console.log(waterArr);
+			console.log(addWater);
 			getDetaildatas();
 			setArray()
 			dataReset();
@@ -79,10 +80,15 @@ document.addEventListener("DOMContentLoaded", () => {
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■JavaScript -->
 <%@ page import="java.util.*"%>
 	
-	 <title>Dam Project</title>
+	 <title>Dam Project-Detail</title>
     <header>
       <nav class="navbar">
-        <h3>Dam Dashboard - Detail (JSP)</h3>
+         <h3>Dam Dashboard - Detail (JSP)</h3>
+        <!-- 
+        <h3>
+        <a href="/DamView" class="ahome">Dam Dashboard - Detail</a>
+     	</h3>
+     	 -->
       </nav>
     </header>
 </head>
@@ -92,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <!--  ■■■좌측 사이드바 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
     <nav class="main-menu">
       <div class="area_catcher"></div>
+      
       <img
         class="icon_sun"
         src="https://blog.kakaocdn.net/dn/61zMy/btrh7wm0fCv/IgGApTNnNkY2Y9UVKKWjbK/img.png"

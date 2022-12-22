@@ -7,25 +7,7 @@ const urlid = urlParams.get('damid');
 const jsonNum = damObj.findIndex(ele => ele.damId == urlid);
 //console.log("현재 페이지 : "+jsonNum)
 
-//기존의 댐 데이터 카드 데이터를 덮어쓰는 함수.
-/*
-const damCard = (damNum) => {
-  console.log("로그 정보")
-  console.log(document.querySelector("#DAM_NAME"));
-  var name = document.querySelector("#DAM_NAME");
-  var worknum = document.querySelector("#WORK_NMPR");
-  var waterSensor = document.querySelector("#WATER_LEVEL");
-  var lightSensor = document.querySelector("#LIGHT");
 
-	//자꾸 있다가 없다가 하는 오류, damName is not defined라는데 있다가 없다가 그런다.
-	//일단 괄호로 감싼다.
-  name.textContent = damObj[damNum].damName;
-  worknum.textContent = damObj[damNum].workNmpr +" 명";
-  waterSensor.textContent = damObj[damNum].waterLevel/10 + " %";
-  lightSensor.textContent = damObj[damNum].light+" Lx";
-  //console.log("damCard Activated");
-};
-*/
 //--테이블용 함수----------------------------------------------
 
 //데이터 카드 html 코드 만드는 함수

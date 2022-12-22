@@ -379,12 +379,18 @@ const chartMaker = () => {
 //설명 : range를 현재 데이터셋 샘플 길이로 잡고
 
 //추가할 x레이블 및 수위 데이터, 최신 데이터 배열 마지막행, 로그 테이블에서도 사용.
-var addmonth= MONTHS.slice(-1);
-var addWater = waterArr[waterArr.length-1];
+var addmonth;
+var addWater;
+
+const checklastArr=()=>{
+	addmonth= MONTHS.slice(-1);
+	addWater = waterArr[waterArr.length-1];
+}
+
 //최신 데이터에 추가할 배열.
 const addData_lastLabel = () => {
 	
-
+	
   Chart.instances[0].config.data.labels.push(addmonth);
   Chart.instances[0].config.data.datasets.forEach(function (dataset) {
   
@@ -448,6 +454,7 @@ const logTablePrint = () => {
 
 // 윈도우가 로드가 될때
 window.onload = function () {
+	checklastArr();
 	chartMaker();
 
 };

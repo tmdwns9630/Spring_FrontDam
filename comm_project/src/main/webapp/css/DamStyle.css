@@ -286,3 +286,17 @@ canvas {
 }
 
 /* ----------------------------middle--- */
+/* a-style */
+
+.ahome {
+  color: white;
+  text-decoration: none;
+  outline: none;
+}
+
+.ahome:hover,
+.ahome:active {
+  text-decoration: none;
+  color: white;
+  background-color: #f59000;
+}
