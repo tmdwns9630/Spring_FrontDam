@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	setInterval(() => {
 			checklastArr();
-			console.log(waterArr);
-			console.log(addWater);
+			//console.log(waterArr);
+			//console.log(addWater);
 			getDetaildatas();
 			setArray()
 			dataReset();
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			
 	  
 	  	//console.log("set! 4000 Interval Activated");
-	}, 1000);
+	}, 5000);
 	});
 </script>
 	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■JavaScript -->
